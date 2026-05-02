@@ -1,30 +1,18 @@
-
-import './globals.css'
-import { Montserrat } from "next/font/google";
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'], // sesuaikan kebutuhan
-  display: 'swap',
-  preload: false
-})
+import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
-  title: 'Portfolio',
-  description: 'My personal portfolio',
-}
+  title: "Candra Irawan — QA Engineer",
+  description: "QA Engineer dengan pengalaman manual testing, test planning, dan bug reporting di produk digital.",
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={montserrat.className}>
-      <body
-        className="
-          min-h-screen bg-linear-to-br from-slate-50 via-white to-blue-50
-          text-slate-900
-        "
-      >
+    <html lang="en">
+      <body className="pt-16">
+        <Navbar />
         {children}
       </body>
     </html>
-  )
+  );
 }

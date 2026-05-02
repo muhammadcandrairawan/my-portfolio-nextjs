@@ -1,87 +1,87 @@
 "use client";
-import { useEffect, useState } from "react";
 
-export default function Navbar({ sections, containerId }) {
-  const [active, setActive] = useState(sections[0].id);
-  const [isSticky, setIsSticky] = useState(false);
+import { useState } from "react";
+import Link from "next/link";
 
-  useEffect(() => {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+const menuItems = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
+];
 
-    const handleScroll = () => {
-      const scrollTop = container.scrollTop;
-
-      // Sticky aktif setelah scroll hero
-      setIsSticky(scrollTop > 120);
-
-      sections.forEach((section) => {
-        const el = document.getElementById(section.id);
-        if (!el) return;
-
-        const offsetTop = el.offsetTop;
-        const offsetHeight = el.offsetHeight;
-
-        if (
-          scrollTop >= offsetTop - 100 &&
-          scrollTop < offsetTop + offsetHeight - 100
-        ) {
-          setActive(section.id);
-        }
-      });
-    };
-
-    container.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [sections, containerId]);
-
-  const scrollToSection = (id) => {
-    const container = document.getElementById(containerId);
-    const el = document.getElementById(id);
-    if (!container || !el) return;
-
-    container.scrollTo({
-      top: el.offsetTop - 80,
-      behavior: "smooth",
-    });
-  };
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header
-      className={`
-        ${isSticky ? "sticky top-0" : "relative"}
-        z-50
-        transition-all duration-300
-        backdrop-blur-md bg-white/80
-        ${isSticky ? "border-b border-slate-200" : ""}
-      `}
-    >
-      <nav className="flex justify-center gap-3 py-3 flex-wrap">
-        {sections.map((section) => {
-          const isActive = active === section.id;
+    <nav className="fixed top-0 left-0 w-full bg-white shadow z-50">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="text-xl font-bold text-gray-800">CI | Candra Irawan</div>
 
-          return (
-            <button
-              key={section.id}
-              onClick={() => scrollToSection(section.id)}
-              className={`
-                text-sm font-medium px-4 py-2 rounded-full
-                transition-all duration-200
-                focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500
-                ${
-                  isActive
-                    ? "bg-blue-600 text-white shadow-sm"
-                    : "text-slate-600 hover:text-blue-600 hover:bg-slate-100"
-                }
-              `}
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-6">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="text-gray-600 hover:text-blue-600 transition"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden text-gray-700 focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
             >
-              {section.name}
-            </button>
-          );
-        })}
-      </nav>
-    </header>
+              {isOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t">
+          <div className="flex flex-col px-4 py-3 space-y-3">
+            {menuItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="text-gray-700 hover:text-blue-600"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
   );
 }
