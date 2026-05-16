@@ -1,13 +1,13 @@
 "use client";
-
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
 const menuItems = [
-  { name: "Home", href: "#home" },
+  { name: "Home", href: "#hero" },
   { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
   { name: "Skills", href: "#skills" },
+  { name: "Projects", href: "#projects" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -19,15 +19,19 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="text-xl font-bold text-gray-800">CI | Candra Irawan</div>
+          <a href="#hero" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center text-white text-sm font-medium">
+              MCI
+            </div>
+          </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden sm:flex items-center gap-6">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-600 hover:text-blue-600 transition"
+                className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
               >
                 {item.name}
               </Link>
@@ -40,41 +44,21 @@ export default function Navbar() {
             className="md:hidden text-gray-700 focus:outline-none"
             aria-label="Toggle Menu"
           >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t">
+        <div className="md:hidden border-t border-gray-100">
           <div className="flex flex-col px-4 py-3 space-y-3">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className="text-gray-700 hover:text-blue-600"
+                className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
               >
                 {item.name}
               </Link>

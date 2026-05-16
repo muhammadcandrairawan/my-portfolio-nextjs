@@ -1,17 +1,17 @@
-import ContactSection from "@/components/ContactSection";
-import SkillSection from "@/components/SkillSection";
-import ProjectSection from "@/components/ProjectSection";
-import AboutSection from "@/components/AboutSection";
-import HomeSection from "@/components/HomeSection";
+import HeroSection from "@/components/sections/Hero";
+import AboutSection from "@/components/sections/About";
+import SkillSection from "@/components/sections/Skills";
+import ProjectSection from "@/components/sections/Projects";
+import Contact from "@/components/sections/Contact";
 
 export default function Page() {
   return (
-    <main className="space-y-32">
-      <HomeSection />
+    <main>
+      <HeroSection />
       <AboutSection />
-      <ProjectSection/>
-      <SkillSection/>
-       <ContactSection/>
+      <SkillSection />
+      <ProjectSection />
+      <Contact />
     </main>
   );
 }

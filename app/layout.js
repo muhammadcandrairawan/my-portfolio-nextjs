@@ -1,17 +1,23 @@
+import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/ui/Navbar";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Candra Irawan — QA Engineer",
-  description: "QA Engineer dengan pengalaman manual testing, test planning, dan bug reporting di produk digital.",
+  title: "Muhammad Candra Irawan — QA Manual Engineer",
+  description: "QA Manual Engineer available for freelance projects. Experienced in functional, regression, and UI/UX testing across web and mobile platforms.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="pt-16">
+      <body className={inter.className}>
         <Navbar />
-        {children}
+        <main className="pt-16">
+           {children}
+        </main>
+       
       </body>
     </html>
   );
