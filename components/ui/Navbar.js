@@ -2,6 +2,7 @@
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const menuItems = [
   { name: "Home", href: "#hero" },
@@ -20,9 +21,13 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <a href="#hero" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gray-900 flex items-center justify-center text-white text-sm font-medium">
-              MCI
-            </div>
+            <Image
+              src="/android-chrome-192x192.png"
+              alt="Muhammad Candra Irawan"
+              width={32}
+              height={32}
+              className="rounded-lg"
+            />
           </a>
 
           {/* Desktop Menu */}

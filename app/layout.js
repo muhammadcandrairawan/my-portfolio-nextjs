@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "Muhammad Candra Irawan — QA Manual Engineer",
   description: "QA Manual Engineer available for freelance projects. Experienced in functional, regression, and UI/UX testing across web and mobile platforms.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
